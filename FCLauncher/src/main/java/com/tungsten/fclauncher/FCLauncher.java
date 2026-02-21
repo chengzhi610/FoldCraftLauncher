@@ -291,6 +291,8 @@ public class FCLauncher {
                     }
                 });
             }
+              // 新增：设置 VK_ICD_FILENAMES 环境变量
+                    envMap.put("VK_ICD_FILENAMES", "/storage/emulated/0/FCL/icd.json");
             return;
         }
         if (FCLBridge.BACKEND_IS_BOAT) {
