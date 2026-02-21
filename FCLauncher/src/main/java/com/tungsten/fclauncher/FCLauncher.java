@@ -216,6 +216,7 @@ public class FCLauncher {
         envMap.put("LD_LIBRARY_PATH", getLibraryPath(config.getContext(), config.getRenderer().getPath()));
         envMap.put("FORCE_VSYNC", "false");
         envMap.put("VK_ICD_FILENAMES", "/storage/emulated/0/FCL/icd.json");
+        envMap.put("VK_LOADER_DEBUG", "all");
 
         // Native mod env var
         envMap.put("MOD_ANDROID_RUNTIME", FCLPath.MOD_RUNTIME_DIR == null ? "" : FCLPath.MOD_RUNTIME_DIR);
@@ -293,7 +294,7 @@ public class FCLauncher {
                 });
             }
               // 新增：设置 VK_ICD_FILENAMES 环境变量
-                    envMap.put("VK_ICD_FILENAMES", "/storage/emulated/0/FCL/icd.json");
+                   // envMap.put("VK_ICD_FILENAMES", "/storage/emulated/0/FCL/icd.json");
             return;
         }
         if (FCLBridge.BACKEND_IS_BOAT) {
