@@ -25,7 +25,7 @@ public class LogSharingUtils {
 
     public static String getLogUploadApiUrl(Context context) {
         if (LocaleUtils.isChinese(context)) {
-            return "https://api.mclogs.lemwood.icu/1/log";
+            return "https://api.logshare.cn/1/log";
         } else {
             return "https://api.mclo.gs/1/log";
         }
