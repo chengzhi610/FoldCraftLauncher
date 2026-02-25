@@ -63,6 +63,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -491,8 +492,7 @@ public class LauncherSettingPage extends FCLCommonPage implements View.OnClickLi
                     } else {
                         type = "png";
                     }
-                    new File(FCLPath.FILES_DIR, "cursor.png").delete();
-                    new File(FCLPath.FILES_DIR, "cursor.gif").delete();
+                    deleteCursorFile();
                     if (AndroidUtils.isDocUri(uri)) {
                         AndroidUtils.copyFile(getActivity(), uri, new File(FCLPath.FILES_DIR, "cursor." + type));
                     } else {
@@ -522,6 +522,7 @@ public class LauncherSettingPage extends FCLCommonPage implements View.OnClickLi
                     } else {
                         type = "png";
                     }
+                    deleteMenuIconFile();
                     if (AndroidUtils.isDocUri(uri)) {
                         AndroidUtils.copyFile(getActivity(), uri, new File(FCLPath.FILES_DIR, "menu_icon." + type));
                     } else {
@@ -590,12 +591,28 @@ public class LauncherSettingPage extends FCLCommonPage implements View.OnClickLi
             }).start();
         }
         if (v == resetCursor) {
-            new File(FCLPath.FILES_DIR, "cursor.png").delete();
-            new File(FCLPath.FILES_DIR, "cursor.gif").delete();
+            deleteCursorFile();
         }
         if (v == resetMenuIcon) {
-            new File(FCLPath.FILES_DIR, "menu_icon.png").delete();
-            new File(FCLPath.FILES_DIR, "menu_icon.gif").delete();
+            deleteMenuIconFile();
+        }
+    }
+
+    private static void deleteMenuIconFile() {
+        try {
+            Files.delete(Paths.get(FCLPath.FILES_DIR, "menu_icon.png"));
+            Files.delete(Paths.get(FCLPath.FILES_DIR, "menu_icon.gif"));
+        } catch (IOException e) {
+            LOG.log(Level.WARNING, "Failed to delete menu icon", e);
+        }
+    }
+
+    private void deleteCursorFile() {
+        try {
+            Files.delete(Paths.get(FCLPath.FILES_DIR, "cursor.png"));
+            Files.delete(Paths.get(FCLPath.FILES_DIR, "cursor.gif"));
+        } catch (IOException e) {
+            LOG.log(Level.WARNING, "Failed to delete cursor", e);
         }
     }
 
