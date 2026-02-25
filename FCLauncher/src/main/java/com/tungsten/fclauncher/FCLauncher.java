@@ -257,6 +257,8 @@ public class FCLauncher {
         if (config.getInstalledModLoaders().isInstallQuilt()) {
             envMap.put("INST_QUILT", "1");
         }
+        String nativeLibDir = config.getContext().getApplicationInfo().nativeLibraryDir;
+        envMap.put("LD_PRELOAD", nativeLibDir + "/libpreload.so");
     }
 
     private static void addRendererEnv(FCLConfig config, HashMap<String, String> envMap) {
