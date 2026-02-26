@@ -51,4 +51,4 @@ Java_com_tungsten_fclauncher_FCLauncher_initAdrenotools(JNIEnv *env, jclass claz
     env->ReleaseStringUTFChars(sdcardDriverDir, sdcard_dir);
 }
 
-} // extern "C"
+} // extern "C" test
