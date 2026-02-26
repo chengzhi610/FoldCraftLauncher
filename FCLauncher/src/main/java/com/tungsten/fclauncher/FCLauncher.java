@@ -34,6 +34,8 @@ import java.util.Map;
 public class FCLauncher {
 
     private static int FCL_VERSION_CODE = -1;
+    
+    private static native void initAdrenotools(String nativeLibDir, String sdcardDriverDir);
 
     private static void log(FCLBridge bridge, String log) {
         bridge.getCallback().onLog(log + "\n");
@@ -497,6 +499,13 @@ public class FCLauncher {
                 // set working directory
                 log(bridge, "Working directory: " + config.getWorkingDir());
                 bridge.chdir(config.getWorkingDir());
+                
+                log(bridge, "Before initAdrenotools");
+                
+                String nativeLibDir = config.getContext().getApplicationInfo().nativeLibraryDir;
+                String sdcardDriverDir = "/sdcard/FCL";
+                initAdrenotools(nativeLibDir, sdcardDriverDir);
+                log(bridge, "After initAdrenotools");
 
                 // launch game
                 launch(config, bridge, "Minecraft");
